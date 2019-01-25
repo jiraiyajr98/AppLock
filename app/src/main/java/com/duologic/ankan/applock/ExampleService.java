@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 
@@ -142,7 +143,6 @@ public class ExampleService extends Service {
         {
 
             String topPackageName;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 UsageStatsManager mUsageStatsManager = (UsageStatsManager) getSystemService(Context.USAGE_STATS_SERVICE);
                 long time = System.currentTimeMillis();
                 // We get usage stats for the last 10 seconds
@@ -159,7 +159,6 @@ public class ExampleService extends Service {
                         if(!prev.equals(topPackageName)) {
                             Log.e(TAG, topPackageName);
                             prev = topPackageName;
-
 
                             if(selectedList.contains(prev))
                             {
@@ -199,7 +198,7 @@ public class ExampleService extends Service {
                         }
                     }
                 }
-            }
+
 
         }
     }
@@ -226,22 +225,31 @@ public class ExampleService extends Service {
         dialog.setContentView(promptsView);
         dialog.getWindow().setGravity(Gravity.CENTER);
 
-        Button cancel = (Button) promptsView.findViewById(R.id.cancel);
+        Button unlock = (Button) promptsView.findViewById(R.id.unlock);
 
-//        cancel.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    if (dialog != null) {
-//                        if (dialog.isShowing()) {
-//                            dialog.dismiss();
-//                        }
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
+        final EditText pass = (EditText)promptsView.findViewById(R.id.pass);
+
+
+
+        unlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    if (dialog != null) {
+
+                        if(pass.getText().toString().equals("12345")) {
+                            if (dialog.isShowing()) {
+                                dialog.dismiss();
+                            }
+                        }
+                        else
+                            pass.setError("Wrong Password");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         dialog.setOnKeyListener(new Dialog.OnKeyListener() {
             @Override

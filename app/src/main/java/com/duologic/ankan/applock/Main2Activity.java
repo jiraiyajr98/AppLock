@@ -45,7 +45,8 @@ public class Main2Activity extends AppCompatActivity {
 //            newInfo.icon = p.applicationInfo.loadIcon(getPackageManager());
 //            res.add(newInfo);
 
-            list.add(new LockObject(p.packageName,false));
+            list.add(new LockObject(p.packageName,false,
+                    p.applicationInfo.loadLabel(getPackageManager()).toString()));
         }
 
 

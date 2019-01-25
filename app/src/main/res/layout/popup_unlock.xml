@@ -21,13 +21,24 @@
         android:textColor="#fff"
         android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/cancel"
+    <EditText
+        android:id="@+id/pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="#FFFFFF"
-        android:text="Cancel"
+        android:ems="10"
+        android:inputType="numberPassword"
+        android:padding="20dp"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/unlock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#FFFFFF"
+        android:text="Unlock"
         android:textColor="@color/colorAccent" />
 
 </LinearLayout>

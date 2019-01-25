@@ -1,11 +1,13 @@
 package com.duologic.ankan.applock.adapter;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +44,14 @@ public class LockAdapter extends RecyclerView.Adapter<LockAdapter.LockHolder> {
         lockHolder.pkg_name.setText(object.getPkg_Name());
         lockHolder.aSwitch.setChecked(object.getStatus());
 
+        lockHolder.name.setText(object.getName());
+
+        try {
+            lockHolder.icon.setImageDrawable( context.getPackageManager().getApplicationIcon(object.getPkg_Name()));
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         lockHolder.aSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,12 +81,16 @@ public class LockAdapter extends RecyclerView.Adapter<LockAdapter.LockHolder> {
 
         TextView pkg_name;
         Switch aSwitch;
+        TextView name;
+        ImageView icon;
 
          LockHolder(@NonNull View itemView) {
             super(itemView);
 
             pkg_name = (TextView) itemView.findViewById(R.id.textView);
             aSwitch = (Switch) itemView.findViewById(R.id.switch1);
+            name = (TextView)itemView.findViewById(R.id.name);
+            icon = (ImageView)itemView.findViewById(R.id.icon);
         }
     }
 
